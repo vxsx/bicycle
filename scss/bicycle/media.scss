@@ -1,0 +1,41 @@
+@mixin max-width($width) {
+    @media all and (max-width: $width) {
+        @content;
+    }
+}
+
+@mixin min-width($width) {
+    @media all and (min-width: $width) {
+        @content;
+    }
+}
+
+@mixin range-width($min-width, $max-width) {
+    @media all and (min-width: $min-width) and (max-width: $max-width) {
+        @content;
+    }
+}
+
+@mixin max-height($height) {
+    @media all and (max-height: $height) {
+        @content;
+    }
+}
+
+@mixin min-height($height) {
+    @media all and (min-height: $height) {
+        @content;
+    }
+}
+
+@mixin range-height($min-height, $max-height) {
+    @media all and (min-height: $min-height) and (max-height: $max-height) {
+        @content;
+    }
+}
+
+@mixin retina() {
+    @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+        @content
+    }
+}

@@ -1,0 +1,39 @@
+$modernizr-prefix: 'm' !default;
+
+@function modernizr-prefix () {
+    @if $modernizr-prefix != '' {
+        @return unquote($modernizr-prefix) + '-';
+    } @else {
+        @return '';
+    }
+}
+
+@mixin no-datauri {
+    .#{modernizr-prefix()}no-datauri & {
+        @content;
+    }
+}
+
+@mixin no-svg {
+    .#{modernizr-prefix()}no-inlinesvg & {
+        @content;
+    }
+}
+
+@mixin no-csstransforms {
+    .#{modernizr-prefix()}no-csstransforms & {
+        @content;
+    }
+}
+
+@mixin no-csstransforms3d {
+    .#{modernizr-prefix()}no-csstransforms3d & {
+        @content;
+    }
+}
+
+@mixin no-flexbox {
+    .#{modernizr-prefix()}no-flexbox & {
+        @content;
+    }
+}

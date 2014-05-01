@@ -1,0 +1,78 @@
+@mixin scrollshadows ($orientation: vertical, $bgcolor: white, $size: 7px) {
+    position: relative;
+    background-repeat: no-repeat;
+    z-index: 1;
+
+    &:after,
+    &:before {
+        content: '';
+        z-index: -1;
+        position: relative;
+        background-repeat: no-repeat;
+        display: block;
+    }
+
+    @if ($orientation == vertical) {
+        background-image: linear-gradient(to right, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent),
+                          radial-gradient(50% 0%, farthest-side, rgba(black, 0.45), transparent),
+                          radial-gradient(50% 100%, farthest-side, rgba(black, 0.45), transparent),
+                          linear-gradient(to right, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent);
+        background-position: 0 0, 0 0, 0 100%, 0 100%;
+        background-size: 100% 1px, 100% $size , 100% $size, 100% 1px;
+
+        &:after,
+        &:before {
+            height: $size * 2;
+        }
+        &:before {
+            margin-bottom: -$size * 2;
+            background-image: linear-gradient(to bottom, $bgcolor, $bgcolor 30%, transparent 100%);
+        }
+        &:after {
+            margin-top: -$size * 2;
+            background-image: linear-gradient(to top, $bgcolor, $bgcolor 30%, transparent 100%);
+        }
+    } @else {
+        background-image: linear-gradient(to bottom, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent),
+                          radial-gradient(0% 50%, farthest-side, rgba(black, 0.45), transparent),
+                          radial-gradient(100% 50%, farthest-side, rgba(black, 0.45), transparent),
+                          linear-gradient(to bottom, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent);
+        background-position: 0 0, 0 0, 100% 0, 100% 0;
+        background-size: 1px 100%, $size 100%, $size 100%, 1px 100%;
+
+        &:before,
+        &:after {
+            width: $size * 2;
+            height: 100%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        &:before {
+            margin-right: -$size * 2;
+            background-image: linear-gradient(to right, $bgcolor, $bgcolor 30%, transparent 100%);
+        }
+        &:after {
+            margin-left: -$size * 2;
+            background-image: linear-gradient(to left, $bgcolor, $bgcolor 30%, transparent 100%);
+        }
+    }
+}
+
+.scroll-shadow {
+    @include scrollshadows();
+    overflow: auto;
+}
+
+.scroll-shadow_type_horizontal {
+    @include scrollshadows($orientation: 'horizontal');
+    overflow: auto;
+    white-space: nowrap;
+
+    .scroll-shadow__i {
+        vertical-align: middle;
+        display: inline-block;
+        height: 100%;
+        box-sizing: border-box;
+    }
+}

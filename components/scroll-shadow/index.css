@@ -1,0 +1,61 @@
+.scroll-shadow {
+  position: relative;
+  background-repeat: no-repeat;
+  z-index: 1;
+  background-image: -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent), -webkit-radial-gradient(50% 0%, farthest-side, rgba(0, 0, 0, 0.45), transparent), -webkit-radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, 0.45), transparent), -webkit-linear-gradient(left, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent);
+  background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent), radial-gradient(50% 0%, farthest-side, rgba(0, 0, 0, 0.45), transparent), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, 0.45), transparent), linear-gradient(to right, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent);
+  background-position: 0 0, 0 0, 0 100%, 0 100%;
+  background-size: 100% 1px, 100% 7px, 100% 7px, 100% 1px;
+  overflow: auto; }
+  .scroll-shadow:after, .scroll-shadow:before {
+    content: '';
+    z-index: -1;
+    position: relative;
+    background-repeat: no-repeat;
+    display: block; }
+  .scroll-shadow:after, .scroll-shadow:before {
+    height: 14px; }
+  .scroll-shadow:before {
+    margin-bottom: -14px;
+    background-image: -webkit-linear-gradient(top, white, white 30%, transparent 100%);
+    background-image: linear-gradient(to bottom, white, white 30%, transparent 100%); }
+  .scroll-shadow:after {
+    margin-top: -14px;
+    background-image: -webkit-linear-gradient(bottom, white, white 30%, transparent 100%);
+    background-image: linear-gradient(to top, white, white 30%, transparent 100%); }
+
+.scroll-shadow_type_horizontal {
+  position: relative;
+  background-repeat: no-repeat;
+  z-index: 1;
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent), -webkit-radial-gradient(0% 50%, farthest-side, rgba(0, 0, 0, 0.45), transparent), -webkit-radial-gradient(100% 50%, farthest-side, rgba(0, 0, 0, 0.45), transparent), -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent);
+  background-image: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent), radial-gradient(0% 50%, farthest-side, rgba(0, 0, 0, 0.45), transparent), radial-gradient(100% 50%, farthest-side, rgba(0, 0, 0, 0.45), transparent), linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3) 25%, rgba(0, 0, 0, 0.3) 75%, transparent);
+  background-position: 0 0, 0 0, 100% 0, 100% 0;
+  background-size: 1px 100%, 7px 100%, 7px 100%, 1px 100%;
+  overflow: auto;
+  white-space: nowrap; }
+  .scroll-shadow_type_horizontal:after, .scroll-shadow_type_horizontal:before {
+    content: '';
+    z-index: -1;
+    position: relative;
+    background-repeat: no-repeat;
+    display: block; }
+  .scroll-shadow_type_horizontal:before, .scroll-shadow_type_horizontal:after {
+    width: 14px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle; }
+  .scroll-shadow_type_horizontal:before {
+    margin-right: -14px;
+    background-image: -webkit-linear-gradient(left, white, white 30%, transparent 100%);
+    background-image: linear-gradient(to right, white, white 30%, transparent 100%); }
+  .scroll-shadow_type_horizontal:after {
+    margin-left: -14px;
+    background-image: -webkit-linear-gradient(right, white, white 30%, transparent 100%);
+    background-image: linear-gradient(to left, white, white 30%, transparent 100%); }
+  .scroll-shadow_type_horizontal .scroll-shadow__i {
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }

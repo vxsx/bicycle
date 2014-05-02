@@ -1,61 +1,46 @@
-@mixin scrollshadows ($orientation: vertical, $bgcolor: white, $size: 7px) {
-    position: relative;
+//Method from http://lea.verou.me/2012/04/background-attachment-local/
+//unfortunately, there is currently a bug in chrome, which renders this poorly
+//https://code.google.com/p/chromium/issues/detail?id=369002
+
+@mixin scrollshadows ($orientation: vertical, $color: black, $bgcolor: white, $size: 7px) {
+    background-color: $bgcolor;
+    background-attachment: local, local, scroll, scroll, scroll, scroll;
     background-repeat: no-repeat;
+    position: relative;
     z-index: 1;
 
-    &:after,
-    &:before {
-        content: '';
-        z-index: -1;
-        position: relative;
-        background-repeat: no-repeat;
-        display: block;
-    }
-
     @if ($orientation == vertical) {
-        background-image: linear-gradient(to right, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent),
-                          radial-gradient(50% 0%, farthest-side, rgba(black, 0.45), transparent),
-                          radial-gradient(50% 100%, farthest-side, rgba(black, 0.45), transparent),
-                          linear-gradient(to right, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent);
-        background-position: 0 0, 0 0, 0 100%, 0 100%;
-        background-size: 100% 1px, 100% $size , 100% $size, 100% 1px;
+        background-image:
+            /* Shadow covers */
+            linear-gradient(to bottom, $bgcolor 30%, rgba($bgcolor, 0)),
+            linear-gradient(to top, $bgcolor 30%, rgba($bgcolor, 0)),
 
-        &:after,
-        &:before {
-            height: $size * 2;
-        }
-        &:before {
-            margin-bottom: -$size * 2;
-            background-image: linear-gradient(to bottom, $bgcolor, $bgcolor 30%, transparent 100%);
-        }
-        &:after {
-            margin-top: -$size * 2;
-            background-image: linear-gradient(to top, $bgcolor, $bgcolor 30%, transparent 100%);
-        }
+            /* Borders */
+            linear-gradient(to right, transparent, rgba($color, 0.3) 25%, rgba($color, 0.3) 75%, transparent),
+            linear-gradient(to right, transparent, rgba($color, 0.3) 25%, rgba($color, 0.3) 75%, transparent),
+
+            /* Shadows */
+            radial-gradient(50% 0, farthest-side, rgba($color, .5), transparent),
+            radial-gradient(50% 100%,farthest-side, rgba($color, .5), transparent);
+
+        background-size: 100% $size*4, 100% $size*4, 100% 1px, 100% 1px, 100% $size, 100% $size;
+        background-position: 0 0, 0 100%, 0 0, 0 100%, 0 0, 0 100%;
     } @else {
-        background-image: linear-gradient(to bottom, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent),
-                          radial-gradient(0% 50%, farthest-side, rgba(black, 0.45), transparent),
-                          radial-gradient(100% 50%, farthest-side, rgba(black, 0.45), transparent),
-                          linear-gradient(to bottom, transparent, rgba(black, 0.3) 25%, rgba(black, 0.3) 75%, transparent);
-        background-position: 0 0, 0 0, 100% 0, 100% 0;
-        background-size: 1px 100%, $size 100%, $size 100%, 1px 100%;
+        background-image:
+            /* Shadow covers */
+            linear-gradient(to right, $bgcolor 30%, rgba(255,255,255,0)),
+            linear-gradient(to left, $bgcolor 30%, rgba(255,255,255,0)),
 
-        &:before,
-        &:after {
-            width: $size * 2;
-            height: 100%;
-            display: inline-block;
-            vertical-align: middle;
-        }
+            /* Borders */
+            linear-gradient(to bottom, transparent, rgba($color, 0.3) 25%, rgba($color, 0.3) 75%, transparent),
+            linear-gradient(to bottom, transparent, rgba($color, 0.3) 25%, rgba($color, 0.3) 75%, transparent),
 
-        &:before {
-            margin-right: -$size * 2;
-            background-image: linear-gradient(to right, $bgcolor, $bgcolor 30%, transparent 100%);
-        }
-        &:after {
-            margin-left: -$size * 2;
-            background-image: linear-gradient(to left, $bgcolor, $bgcolor 30%, transparent 100%);
-        }
+            /* Shadows */
+            radial-gradient(0 50%, farthest-side, rgba($color, .5), transparent),
+            radial-gradient(100% 50%,farthest-side, rgba($color, .5), transparent);
+
+        background-size: $size*4 100%, $size*4 100%, 1px 100%, 1px 100%, $size 100%, $size 100%;
+        background-position: 0 0, 100% 0, 0 0, 100% 0, 0 0, 100% 0;
     }
 }
 
@@ -68,11 +53,9 @@
     @include scrollshadows($orientation: 'horizontal');
     overflow: auto;
     white-space: nowrap;
+}
 
-    .scroll-shadow__i {
-        vertical-align: middle;
-        display: inline-block;
-        height: 100%;
-        box-sizing: border-box;
-    }
+.scroll-shadow_color_green {
+    @include scrollshadows($color: #f00, $size: 12px, $bgcolor: #BCD92A) ;
+    overflow: auto;
 }

@@ -1,0 +1,83 @@
+$c-link: #0000EE !default;
+$c-link-hover: red !default;
+$c-link-visited: #660099 !default;
+/*
+# Basic link styles
+All links should have this class.
+
+    <a href="#" class="link" style="font-size: 16px">Basic link</a>
+ */
+a, .link {
+    color: $c-link;
+    text-decoration: underline;
+
+    &:focus {
+        outline: thin dotted;
+    }
+    &:visited {
+        color: $c-link-visited;
+    }
+    &:hover {
+        color: $c-link-hover;
+    }
+}
+
+
+/*
+## Wrapper links
+Link could be a wrapper, with icon or other text
+
+    <a href="#" class="link link_wrapper" style="font-size: 16px">
+        &larr; <span class="link__i">Left</span>
+    </a>
+
+    <a href="#" class="link link_wrapper" style="font-size: 16px">
+        <span class="link__i">Right</span> &rarr;
+    </a>
+
+*/
+.link_wrapper {
+    text-decoration: none !important;
+
+    &:hover {
+        color: $c-link-hover;
+
+        .link__i {
+            /* text-decoration: none; */
+            color: $c-link-hover;
+        }
+        // I don't support old ie, but this helps
+        // .ie & {
+        //     _word-spacing: 0 !important;
+        // }
+    }
+}
+    .link__i {
+        /* line-height: 1.1; */
+        text-decoration: underline;
+    }
+
+/*
+## Pseudo links
+There are also pseudolinks
+
+    <a href="#" class="link link_pseudo" style="font-size: 16px">Pseudolink</a>
+
+And it can be combined
+
+    <a href="#" class="link link_pseudo link_wrapper" style="font-size: 16px">
+        &larr; <span class="link__i">Wrapped pseudolink</span>
+    </a>
+*/
+.link_pseudo,
+.link_pseudo .link__i {
+    text-decoration: none !important;
+    border-bottom: 1px dashed;
+
+    &:hover {
+        color: $c-link-hover;
+    }
+}
+.link_pseudo.link_wrapper {
+    border-bottom: 0;
+}

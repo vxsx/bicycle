@@ -2,3 +2,4 @@ node_modules
 .sass-cache
 components/*/*.css
 components/*/*.map
+docs/

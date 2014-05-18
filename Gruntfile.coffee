@@ -3,6 +3,8 @@ module.exports = (grunt) ->
   require('load-grunt-tasks')(grunt)
 
   grunt.initConfig
+    pkg: grunt.file.readJSON 'package.json'
+
     sass:
       components:
         files: [{
@@ -24,6 +26,15 @@ module.exports = (grunt) ->
           dest: 'components/'
         }]
 
+    yuidoc:
+      components:
+        name: '<%= pkg.name %>'
+        description: '<%= pkg.description %>'
+        version: '<%= pkg.version %>'
+        url: '<%= pkg.homepage %>'
+        options:
+          paths: 'components/'
+          outdir: 'docs/'
 
     watch:
       options:

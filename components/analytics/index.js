@@ -1,20 +1,25 @@
 /**
-* Component for tracking events with Yandex.Metrica (and ga in future)
-*
-* Unfortunately, you still need to have yandex metrika initialization on
-* the page, since their bot is checking the counter availability this way.
-* So you still have to insert the usual counter code but prepend
-*
-*   if (navigator.userAgent.indexOf('YandexMetrika') > -1)
-*
-* There should always be a config.js with counters ids
-*
-*   config = {
-*       analytics: {
-*            yandex: '11111111',
-*            google: "UA-11111111-1"
-*       }
-*   }
+Component for tracking events with Yandex.Metrica (and ga in future).
+
+Unfortunately, you still need to have yandex metrika initialization on
+the page, since their bot is checking the counter availability this way.
+So you still have to insert the usual counter code but prepend
+
+    if (navigator.userAgent.indexOf('YandexMetrika') > -1)
+
+There should always be a config.js with counters ids
+
+    config = {
+        analytics: {
+             yandex: '11111111',
+             google: "UA-11111111-1"
+        }
+    }
+
+That's basically it.
+
+@module Analytics
+@requires config
 */
 define([
     'config'
@@ -23,8 +28,10 @@ define([
     var deferredEvents = [];
 
     /**
-    * @function trackEvent
-    * @param {Object} event params of the event => { category: '', action: '', params: {} }
+    * Tracks event with yandex.metrika
+    *
+    * @method trackEvent
+    * @param {Object} event
     * @param {String} event.category
     * @param {String} event.action
     * @param {Object} [event.params] optional params
@@ -37,6 +44,11 @@ define([
         }
     }
 
+    /**
+    * Initializes Ya.Metrika counter
+    *
+    * @method initYandexMetrika
+    */
     function initYandexMetrika () {
         (function (d, w, c) {
             (w[c] = w[c] || []).push(function () {
@@ -72,12 +84,21 @@ define([
         //TODO
     }
 
+    /**
+    * Inits all counters
+    *
+    * @method initCounters
+    */
     function initCounters () {
         initYandexMetrika();
     }
 
+    //Auto init
     initCounters();
 
+    /**
+    * @class Analytics
+    */
     return {
         trackEvent: trackEvent,
         initCounters: initCounters

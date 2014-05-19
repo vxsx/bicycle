@@ -1,5 +1,16 @@
+/**
+* Adapted from jquery.browser which was removed
+* in jQuery 1.9, [documentation here](http://api.jquery.com/jQuery.browser/)
+*
+* @module Browser
+*/
 define([], function () {
-    //Adapted from jquery.browser
+    /**
+    * Contains flags for the useragent, read from navigator.userAgent
+    *
+    * @class Browser
+    * @static
+    */
     var Browser = (function () {
         function uaMatch (ua) {
             ua = ua.toLowerCase();

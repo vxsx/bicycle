@@ -32,6 +32,7 @@ module.exports = (grunt) ->
         description: '<%= pkg.description %>'
         version: '<%= pkg.version %>'
         url: '<%= pkg.homepage %>'
+        # logo: '../assets/logo.svg'
         options:
           paths: 'components/'
           outdir: 'docs/'
@@ -45,6 +46,11 @@ module.exports = (grunt) ->
           'components/**/*.scss'
         ],
         tasks: ['sass:components', 'autoprefixer']
+      docs:
+        files: [
+          'components/**/*.js'
+        ]
+        tasks: ['yuidoc:components']
 
   grunt.registerTask 'components', ['sass:components', 'autoprefixer:components']
   grunt.registerTask 'default', ['watch']

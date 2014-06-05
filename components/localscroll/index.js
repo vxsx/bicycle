@@ -1,14 +1,15 @@
 /**
- * @author Vadim Sikora
- * 
- * Applies to pseudo links that scroll to
- * some id in the document (as ooposed to jumping there)
- *
- * default scroll-time: 300ms
- * default offset: -20px
- *
- * override through data-components attribute
- */
+Applies to pseudo links that scroll to
+some id in the document (as opposed to jumping there)
+
+    default scroll-time: 300ms
+    default offset: -20px
+
+override through data-components attribute
+
+@module localscroll
+@example <code>&lt;a href="#next-section" data-offset="-10" class="js-localscroll link link_type_pseudo"&gt;next&lt;/a&gt;</code>
+*/
 define(['jquery'], function ($) {
     $(document).on('click', '.js-localscroll', function (e) {
         e.preventDefault();

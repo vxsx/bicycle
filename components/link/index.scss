@@ -1,27 +1,85 @@
-$c-link: #0000EE !default;
+@import '../../scss/bicycle';
+
+$c-link: #3879D9 !default;
 $c-link-hover: red !default;
 $c-link-visited: #660099 !default;
+$link-style: gradient !default; //could be underline or gradient TODO add border style
+$c-link-underline: rgba($c-link, 0.8) !default;
+$c-link-underline-hover: $c-link-hover;
+
+$c-link-visited: $c-link;
+
+// $link-style: underline;
+
+@mixin bicycle-no-underline() {
+    @if $link-style == 'underline' {
+        text-decoration: none;
+    } @else {
+        background-image: none;
+    }
+}
+
+@mixin bicycle-underline($color: $c-link-underline, $style: normal) {
+    @if $link-style == 'underline' {
+        @if $style == 'normal' {
+            text-decoration: underline;
+        } @else {
+            text-decoration: none;
+            border-bottom: 1px dashed;
+        }
+    } @else {
+        text-decoration: none;
+        /* background-image: linear-gradient(to bottom, $color 0, $color 50%, transparent 50%, transparent 100%); */
+        @if $style == 'normal' {
+            background-image: url('data:image/svg+xml;utf8,<svg width="10" height="2" viewPort="0 0 10 2" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="10" height="1" fill="#{$color}" /></svg>');
+        } @else {
+            background-image: url('data:image/svg+xml;utf8,<svg width="10" height="2" viewPort="0 0 10 2" xmlns="http://www.w3.org/2000/svg"><rect x="0" y="0" width="6" height="1" fill="#{$color}" /></svg>');
+        }
+        background-position: 0 95%;
+        background-repeat: repeat-x;
+        background-size: 10px 2px;
+        @include retina() {
+            background-size: 5px 1px;
+        }
+    }
+}
+
+//export
+@mixin no-underline() {
+    &,
+    &:hover,
+    & .link__i,
+    &:hover .link__i {
+        @include bicycle-no-underline();
+    }
+}
+
 /*
 # Basic link styles
 All links should have this class.
 
     <a href="#" class="link" style="font-size: 16px">Basic link</a>
- */
+*/
 a, .link {
     color: $c-link;
-    text-decoration: underline;
+    @include bicycle-underline();
 
     &:focus {
         outline: thin dotted;
     }
     &:visited {
         color: $c-link-visited;
+        @if ($link-style != 'underline') {
+            @include bicycle-underline($c-link-visited);
+        }
     }
     &:hover {
         color: $c-link-hover;
+        @if ($link-style != 'underline') {
+            @include bicycle-underline($c-link-hover);
+        }
     }
 }
-
 
 /*
 ## Wrapper links
@@ -34,27 +92,29 @@ Link could be a wrapper, with icon or other text
     <a href="#" class="link link_wrapper" style="font-size: 16px">
         <span class="link__i">Right</span> &rarr;
     </a>
-
 */
+a.link_wrapper,
 .link_wrapper {
-    text-decoration: none !important;
+    @include bicycle-no-underline();
 
     &:hover {
+        @if ($link-style != 'underline') {
+            @include bicycle-no-underline();
+        }
         color: $c-link-hover;
+        @include bicycle-no-underline();
 
         .link__i {
             /* text-decoration: none; */
             color: $c-link-hover;
+            @if ($link-style != 'underline') {
+                @include bicycle-underline($c-link-underline-hover);
+            }
         }
-        // I don't support old ie, but this helps
-        // .ie & {
-        //     _word-spacing: 0 !important;
-        // }
     }
 }
     .link__i {
-        /* line-height: 1.1; */
-        text-decoration: underline;
+        @include bicycle-underline();
     }
 
 /*
@@ -72,12 +132,22 @@ And it can be combined
 .link_pseudo,
 .link_pseudo .link__i {
     text-decoration: none !important;
-    border-bottom: 1px dashed;
+    @include bicycle-underline($c-link-underline, 'dashed');
 
     &:hover {
         color: $c-link-hover;
+        @if ($link-style != 'underline') {
+            @include bicycle-underline($c-link-underline-hover, 'dashed');
+        }
     }
 }
 .link_pseudo.link_wrapper {
     border-bottom: 0;
+    @if ($link-style != 'underline') {
+        &:hover {
+            .link__i {
+                @include bicycle-underline($c-link-underline-hover, 'dashed');
+            }
+        }
+    }
 }

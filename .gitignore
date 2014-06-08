@@ -2,4 +2,5 @@ node_modules
 .sass-cache
 components/*/*.css
 components/*/*.map
+js/vendor
 docs/

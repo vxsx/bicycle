@@ -20,8 +20,8 @@
             linear-gradient(to right, transparent, rgba($color, 0.3) 25%, rgba($color, 0.3) 75%, transparent),
 
             /* Shadows */
-            radial-gradient(50% 0, farthest-side, rgba($color, .5), transparent),
-            radial-gradient(50% 100%,farthest-side, rgba($color, .5), transparent);
+            radial-gradient(farthest-side at 50% 0, rgba($color, .5), transparent),
+            radial-gradient(farthest-side at 50% 100%, rgba($color, .5), transparent);
 
         background-size: 100% $size*4, 100% $size*4, 100% 1px, 100% 1px, 100% $size, 100% $size;
         background-position: 0 0, 0 100%, 0 0, 0 100%, 0 0, 0 100%;
@@ -36,8 +36,8 @@
             linear-gradient(to bottom, transparent, rgba($color, 0.3) 25%, rgba($color, 0.3) 75%, transparent),
 
             /* Shadows */
-            radial-gradient(0 50%, farthest-side, rgba($color, .5), transparent),
-            radial-gradient(100% 50%,farthest-side, rgba($color, .5), transparent);
+            radial-gradient(farthest-side at 0 50%, rgba($color, .5), transparent),
+            radial-gradient(farthest-side at 100% 50%, rgba($color, .5), transparent);
 
         background-size: $size*4 100%, $size*4 100%, 1px 100%, 1px 100%, $size 100%, $size 100%;
         background-position: 0 0, 100% 0, 0 0, 100% 0, 0 0, 100% 0;
